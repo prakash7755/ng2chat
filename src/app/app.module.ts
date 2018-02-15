@@ -12,6 +12,8 @@ import { UserChatMsgComponent } from './user-chat-msg/user-chat-msg.component';
 
 
 import { UserServiceService } from './services/user-service/user-service.service';
+import { ChatAppServiceService } from './services/chat-app-service/chat-app-service.service';
+
 
 
 
@@ -28,7 +30,7 @@ import { UserServiceService } from './services/user-service/user-service.service
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserServiceService],
+  providers: [UserServiceService, ChatAppServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

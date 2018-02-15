@@ -17,7 +17,7 @@ export class UserServiceService {
       .post(apiURT + '/signup', user)
       .toPromise()
       .then((data: any) => {
-        localStorage.setItem('tocken', data.token);
+        localStorage.setItem('token', data.token);
         return data
       })
       .catch(err => {
