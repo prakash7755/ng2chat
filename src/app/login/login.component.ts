@@ -13,6 +13,7 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
   public user;
+
   constructor(private location: Location, private userServ: UserServiceService) { 
       this.user = {};
   }

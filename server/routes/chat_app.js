@@ -23,14 +23,20 @@
             .post((req, res, next) => {
             	const { msg, status } = req.body || {};
             	const userChat = new UserChat({ msg, status});
-
-            	userChat.save((err) => {
+            	userChat.save((err,doc) => {
             		if (err) {
-            			res.status(404).json({msg: 'User Not Chated'})
+            			return res.status(404).json({msg: 'User Not Chated'})
             		}
-            		res.status(200).json({msg: 'Success'})
+
+            		res.json({msg: 'Success', data: doc})
             	}) 
             })
+
+
+
+        /*
+         * Error Heandling 
+         */
 
             router.use((error, res, req, next) => {
             	const { message } = error || {};

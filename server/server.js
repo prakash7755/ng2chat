@@ -1,32 +1,23 @@
 'use strict';
 const express = require('express');
 const app = express();
+const http = require('http').createServer(app);
+const socketIo = require('./socket_io_connection/socket_io')(http);
 const cors = require('cors');
 const port = process.env.PORT || 8000;
+app.use(cors());
 const db = require('./db/db_connection');
 const morganLogger = require('./morganLogger/logger')(app);
 
 
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next()
-});
+
+
+
+const routes = require('./routes')(app);
 
 
 
 
-
-
-app.use(express.static('public'));
-
-app.use(cors());
-
-
-const routes = require('./routes/index')(app);
-
-app.listen(port, ()=>{
-	console.log(`App listen Port @ ${port}`);
+http.listen(port, () => {
+  console.log(`App listen Port @ ${port}`);
 })

@@ -16,20 +16,22 @@
    /*
     *  User Authorization Checking Process
     */
-        app.use('/api/chat', (req, res, next) => {
-            const token = (req.headers || {}).authorization
-            console.log(token)
-            if (!token) {
-                res.status(401).json({ msg: 'Your Not Authorized' })
-            }
-            let tokenVerify;
-            try {
-                tokenVerify = TockenServ.verifyToken(token)
-                next();
-            } catch (error) {
-                return res.status(401).json({ message: error.message })
-            }
-        })
+        // app.use('/api/chat', (req, res, next) => {
+        //     console.log(req.headers)
+        //     const token = (req.headers || {}).authorization
+        //     console.log(token)
+        //     if (!token) {
+        //         res.status(401).json({ msg: 'Your Not Authorized' })
+        //     }
+        //     let tokenVerify;
+        //     try {
+        //         tokenVerify = TockenServ.verifyToken(token)
+        //         next();
+        //     } catch (error) {
+        //        res.status(401).json({ message: error.message })
+        //        next();
+        //     }
+        // })
         app.use('/api/chat', UserChats)
     }
 

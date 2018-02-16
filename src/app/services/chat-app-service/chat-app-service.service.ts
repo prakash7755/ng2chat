@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import * as io from 'socket.io-client';
 
 
 const apiURT: String = 'http://localhost:8000/api/chat';
@@ -8,15 +9,19 @@ const apiURT: String = 'http://localhost:8000/api/chat';
 
 @Injectable()
 export class ChatAppServiceService {
-
-  constructor(private http: HttpClient) { }
-
-  chatMsg(data){
+   private headers;
+    constructor(private http: HttpClient) { 
+   this.headers = {};
+  }
+  sendMessage(data){
+    let token = localStorage.token;
+    if (token) {
+      this.headers.Authorization = token
+    }
      return this.http
-           .post(apiURT + '/user', data)
+           .post(apiURT + '/user', data,  this.headers )
            .toPromise()
            .then((data: any) =>{
-           	console.log(data)
            	return data || {};
            })
            .catch(err => {
@@ -25,3 +30,4 @@ export class ChatAppServiceService {
   }
 
 }
+

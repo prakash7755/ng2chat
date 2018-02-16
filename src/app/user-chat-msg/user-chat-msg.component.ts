@@ -16,14 +16,14 @@ export class UserChatMsgComponent implements OnInit {
   }
     
     chatUser(){
-       this.userServ.chatMsg(this.user)
-       .then((data: any)=> {
-          this.items = ( data || {}).data
-          console.log(this.items)
-       })
-       .catch(err => {
-       	console.log('chat error -', err)
-       })
+       this.userServ.sendMessage(this.user)
+       // .then((data: any)=> {
+       //    this.items = ( data || {}).data
+       //    console.log(this.items)
+       // })
+       // .catch(err => {
+       // 	console.log('chat error -', err)
+       // })
     }
 
 
